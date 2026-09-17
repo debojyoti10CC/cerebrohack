@@ -1,7 +1,5 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "cd cerebrohack-app && npm install && npm run build",
   "outputDirectory": "cerebrohack-app/dist",
-  "installCommand": "cd cerebrohack-app && npm install",
-  "framework": "vite",
-  "rootDirectory": "cerebrohack-app"
+  "framework": null
 }
