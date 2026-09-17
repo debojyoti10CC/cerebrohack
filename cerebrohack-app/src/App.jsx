@@ -115,23 +115,76 @@ const SENTIMENTS = [
    ══════════════════════════════════════════════════════════ */
 
 function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const close = () => setMenuOpen(false)
+
   return (
     <nav className="primary-nav" role="navigation" aria-label="Primary navigation">
       <div className="container--wide primary-nav__inner">
         <div className="nav-wordmark" aria-label="CEREBRO">
           {'[ CEREBRO ]'}
         </div>
+
+        {/* Desktop links */}
         <ul className="nav-links">
           <li><a href="#about">About</a></li>
-          <li><a href="#tracks">Tracks</a></li>
+          <li><a href="#tracks">Problem Statements</a></li>
           <li><a href="#schedule">Schedule</a></li>
           <li><a href="#judges">Judges</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
-        <a href="#register" className="btn-primary" id="nav-register-btn">
+
+        {/* Desktop CTA */}
+        <a
+          href="https://unstop.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-primary nav-cta-desktop"
+          id="nav-register-btn"
+        >
           Register ↗
         </a>
+
+        {/* Hamburger button — mobile only */}
+        <button
+          className="nav-hamburger"
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          id="nav-hamburger-btn"
+        >
+          {menuOpen ? '[×]' : '[≡]'}
+        </button>
       </div>
+
+      {/* Mobile drawer */}
+      {menuOpen && (
+        <div className="nav-drawer" role="dialog" aria-label="Mobile navigation">
+          <ul className="nav-drawer__links">
+            {[
+              ['#about',    'About'],
+              ['#tracks',   'Problem Statements'],
+              ['#schedule', 'Schedule'],
+              ['#judges',   'Judges'],
+              ['#faq',      'FAQ'],
+            ].map(([href, label]) => (
+              <li key={href}>
+                <a href={href} onClick={close}>[+] {label}</a>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="https://unstop.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+            style={{ display: 'block', textAlign: 'center', marginTop: 'var(--sp-lg)' }}
+            onClick={close}
+          >
+            Register on Unstop ↗
+          </a>
+        </div>
+      )}
     </nav>
   )
 }
